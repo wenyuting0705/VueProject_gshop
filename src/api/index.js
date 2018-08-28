@@ -3,6 +3,6 @@ const BASE = '/api'
 
 export const reqAddress = (geohash) => ajax(`${BASE}/position/${geohash}`)
 
-export const reqFoodCategory = () => ajax(BASE + '/index_category')
+export const reqCategorys = () => ajax(BASE + '/index_category')
 
-export const reqShops = () => ajax(BASE + '/shops')
+export const reqShops = (latitude,longitude) => ajax(BASE + '/shops',{latitude,longitude})
