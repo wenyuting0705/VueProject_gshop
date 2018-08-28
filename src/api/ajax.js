@@ -20,7 +20,7 @@ export default function ajax(url,data={},type='GET') {
       promise = axios.post(url, data)
     }
     promise
-      .then(resolve =>{
+      .then(respone =>{
         resolve(respone.data)
       })
       .catch(error => {
