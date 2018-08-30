@@ -1,7 +1,7 @@
 <template>
   <section class="profile">
     <HeaderTop title="我的"/>
-    <router-link to="/login">
+    <router-link :to="user._id?'/userinfo':'/login'">
       <section class="profile-number">
         <a href="javascript:" class="profile-link">
           <div class="profile_image">
@@ -93,9 +93,13 @@
   </section>
 </template>
 <script>
+  import {mapState} from 'vuex'
   export default {
     data() {
       return {}
+    },
+    computed:{
+      ...mapState(['user'])
     }
   }
 </script>
