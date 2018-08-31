@@ -7,6 +7,8 @@ import store from './store'
 
 import HeaderTop from './components/HeaderTop/HeaderTop.vue'
 
+import './mock/mockServer'
+
 Vue.component('HeaderTop',HeaderTop)
 Vue.component(Button.name,Button)
 

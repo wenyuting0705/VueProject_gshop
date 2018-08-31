@@ -32,3 +32,9 @@ export const reqSmslogin = (phone, code) => ajax('/api/login_sms', {phone, code}
 export const reqUser = () => ajax('/api/userinfo')
 
 export const reqLogout = ()=> ajax('/api/logout')
+
+export const reqShopGoods = () =>ajax('/shop_goods')
+
+export const reqShopRatings = () => ajax('/shop_ratings')
+
+export const reqShopInfo = () => ajax('/shop_info')
