@@ -9,7 +9,7 @@
         </div>
       </div>
       <div class="login_content">
-        <form @submit.prevent="login">
+        <form>
           <div :class="{on:!loginWay}">
             <section class="login_message">
               <input type="tel" maxlength="11" placeholder="手机号" v-model="phone">
@@ -17,7 +17,7 @@
                       :class="{right_phone_number:isRightPhone}">{{computeTime > 0 ? `已发送(${computeTime}s)`:'获取验证码'}}</button>
             </section>
             <section class="login_verification">
-              <input type="tel" maxlength="8" placeholder="验证码">
+              <input type="tel" maxlength="8" placeholder="验证码" v-model="code">
             </section>
             <section class="login_hint">
               温馨提示：未注册硅谷外卖帐号的手机号，登录时将自动注册，且代表已同意
@@ -38,11 +38,11 @@
               </section>
               <section class="login_message">
                 <input type="text" maxlength="11" placeholder="验证码" v-model="captcha">
-                <img class="get_verification" src="http://localhost:5000/captcha" alt="captcha" @click.prevent="updateCaptcha" ref="update">
+                <img class="get_verification" src="http://localhost:5000/captcha" alt="captcha" @click.prevent="updateCaptcha" ref="captcha">
               </section>
             </section>
           </div>
-          <button class="login_submit">登录</button>
+          <button class="login_submit" @click.prevent="login">登录</button>
         </form>
         <a href="javascript:;" class="about_us">关于我们</a>
       </div>
@@ -95,7 +95,7 @@
        }
       },
       updateCaptcha(){
-        this.$refs.update.src = 'http://localhost:5000/captcha?time='+Date.now()
+        this.$refs.captcha.src = 'http://localhost:5000/captcha?time='+Date.now()
       },
       sendMessage(msg){
         MessageBox.alert(msg)
@@ -122,7 +122,8 @@
         }
         if(result.code===0){
           const user = result.data
-          this.$store.dispatch('getUser',user)
+          this.$store.dispatch('saveUser',user)
+          this.$router.replace('/profile')
         }else {
           this.sendMessage(result.msg)
         }

@@ -2,13 +2,16 @@ import {
   RECEIVE_ADDRESS,
   RECEIVE_CATEGORYS,
   RECEIVE_SHOPS,
-  RECEIVE_USER
+  RECEIVE_USER,
+  RESET_USER
 } from './mutations-types'
 
 import {
   reqAddress,
   reqCategorys,
-  reqShops
+  reqShops,
+  reqUser,
+  reqLogout
 } from '../api'
 
 export default {
@@ -37,7 +40,20 @@ export default {
 
     commit(RECEIVE_SHOPS,{shops})
   },
-  getUser({commit},user){
+  saveUser({commit},user){
     commit(RECEIVE_USER,{user})
+  },
+  async getUser({commit}){
+    const result = await reqUser()
+    if(result.code===0){
+      const user = result.data
+      commit(RECEIVE_USER,{user})
+    }
+  },
+  async logout({commit}){
+    const result = await reqLogout()
+    if(result.code===0){
+      commit(RESET_USER)
+    }
   }
 }
