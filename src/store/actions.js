@@ -6,7 +6,10 @@ import {
   RESET_USER,
   RECEIVE_GOODS,
   RECEIVE_RATINGS,
-  RECEIVE_INFO
+  RECEIVE_INFO,
+  INCREMENT_COUNT,
+  DECREMENT_COUNT,
+  CLEAR_CART
 } from './mutations-types'
 
 import {
@@ -84,5 +87,15 @@ export default {
       const info = result.data
       commit(RECEIVE_INFO,{info})
     }
+  },
+  updateFoodCount({commit},{isAdd,food}){
+    if(isAdd){
+      commit(INCREMENT_COUNT,{food})
+    }else{
+      commit(DECREMENT_COUNT,{food})
+    }
+  },
+  clearCart({commit}){
+    commit(CLEAR_CART)
   }
 }
